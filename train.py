@@ -107,7 +107,7 @@ def run_validation(model, validation_ds, tokenizer_src, tokenizer_tgt, max_len, 
         writer.add_scalar('validation wer', wer, global_step)
         writer.flush()
 
-        # bleu score
+        
         # comparison of n-gram between predicted and reference sent
         metric = torchmetrics.BLEUScore()
         bleu = metric(predicted, expected)
