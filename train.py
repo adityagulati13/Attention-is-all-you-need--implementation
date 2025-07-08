@@ -99,20 +99,20 @@ def run_validation(model, validation_ds, tokenizer_src, tokenizer_tgt, max_len, 
         writer.add_scalar('validation cer', cer, global_step)
         writer.flush()
 
-    # word error rate
-    #for word level mistakes
+        # word error rate
+        #for word level mistakes
 
-    metric = torchmetrics.WordErrorRate()
-    wer = metric(predicted, expected)
-    writer.add_scalar('validation wer', wer, global_step)
-    writer.flush()
+        metric = torchmetrics.WordErrorRate()
+        wer = metric(predicted, expected)
+        writer.add_scalar('validation wer', wer, global_step)
+        writer.flush()
 
-    # bleu score
-    # comparison of n-gram between predicted and reference sent
-    metric = torchmetrics.BLEUScore()
-    bleu = metric(predicted, expected)
-    writer.add_scalar('validation BLEU', bleu, global_step)
-    writer.flush()
+        # bleu score
+        # comparison of n-gram between predicted and reference sent
+        metric = torchmetrics.BLEUScore()
+        bleu = metric(predicted, expected)
+        writer.add_scalar('validation BLEU', bleu, global_step)
+        writer.flush()
 #----------------------------------val code ends------------------------------------------------------------------------
 
 def get_all_sentences(ds, lang):
