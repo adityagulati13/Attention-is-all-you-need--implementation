@@ -94,23 +94,24 @@ def run_validation(model, validation_ds, tokenizer_src, tokenizer_tgt, max_len, 
     if writer:
         #evaluate char error rate
         #for character level mistakes
-        metric = torchmetrics.CharErrorRate()
-        cer = metric(predicted, expected)
+        cer_metric = torchmetrics.CharErrorRate()
+        cer = cer_metric(predicted, expected)
         writer.add_scalar('validation cer', cer, global_step)
         writer.flush()
 
         # word error rate
         #for word level mistakes
 
-        metric = torchmetrics.WordErrorRate()
-        wer = metric(predicted, expected)
+        wer_metric = torchmetrics.WordErrorRate()
+        wer = wer_metric(predicted, expected)
         writer.add_scalar('validation wer', wer, global_step)
         writer.flush()
 
         
         # comparison of n-gram between predicted and reference sent
-        metric = torchmetrics.BLEUScore()
-        bleu = metric(predicted, expected)
+        bleu_metric = torchmetrics.BLEUScore()
+        expected_bleu = [[t] for t in expected]
+        bleu = bleu_metric(predicted, expected_bleu)
         writer.add_scalar('validation BLEU', bleu, global_step)
         writer.flush()
 #----------------------------------val code ends------------------------------------------------------------------------
