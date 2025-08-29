@@ -16,7 +16,7 @@ import torchmetrics
 import warnings
 import os
 
-#-------------------------------------------val code starts-------------------------------------------------------------
+#val code starts
 def greedy_decode(model, source, source_mask, tokenizer_src, tokenizer_tgt, max_len, device):
     #autoregressive inference logic
     #will generate a target sequence, one token at a time
@@ -114,7 +114,6 @@ def run_validation(model, validation_ds, tokenizer_src, tokenizer_tgt, max_len, 
         bleu = bleu_metric(predicted, expected_bleu)
         writer.add_scalar('validation BLEU', bleu, global_step)
         writer.flush()
-#----------------------------------val code ends------------------------------------------------------------------------
 
 def get_all_sentences(ds, lang):
     for item in ds:
@@ -258,13 +257,14 @@ def train_model(config):
 #     config = get_config()
 #     train_model(config)
 if __name__ == '__main__':
-    import time  # 🟢 Add this at top
-    start_time = time.time()  # 🟢 Track start time
+    import time  
+    start_time = time.time()  
     warnings.filterwarnings("ignore")
     config = get_config()
     train_model(config)
-    end_time = time.time()  # 🟢 Track end time
-    print(f"\n🟢 Total Training Time: {(end_time - start_time)/60:.2f} minutes")
+    end_time = time.time()  
+    print(f"\n Total Training Time: {(end_time - start_time)/60:.2f} minutes")
+
 
 
 
